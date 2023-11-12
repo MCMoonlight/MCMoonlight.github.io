@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="utf-8" />
     <title>Archives | MCMoonlight</title>
@@ -33,6 +33,8 @@
 <script src="/js/lib/preview.js"></script>
 
 
+
+<script src="/js/lib/search.js"></script>
 
 
 
@@ -147,21 +149,9 @@
             
 <div id="archives">
     
+    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
+    
     <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="关于我们">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/11/11</div>
-                <a href="/2023/11/11/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/">
-                    <h3>关于我们</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
         <div class="timeline" data-title="主页">
             <div class="timeline-tail"></div>
@@ -225,3 +215,9 @@
     
 </body>
 </html>
+<canvas
+    id="fireworks"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+></canvas>
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+<script src="/js/fireworks.min.js"></script>
