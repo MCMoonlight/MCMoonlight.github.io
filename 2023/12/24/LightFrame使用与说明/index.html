@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>LightFrame使用与说明 | MCMoonlight</title>
+    <meta name="author" content="FSRH,bxcxc" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+<script src="https://cdn.staticfile.org/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.loli.net" />
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdn.staticfile.org/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>MCMOONLIGHT</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;MCMOONLIGHT</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>LightFrame使用与说明</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/12/24
+        </span>
+        
+        <span class="category">
+            <a href="/categories/tutorial/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                tutorial
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/c-cpp/" style="color: #ffa2c4">C/C++</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/software/" style="color: #ff7d73">software</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="LightFrame"><a href="#LightFrame" class="headerlink" title="LightFrame"></a>LightFrame</h2><p>传送门：<a target="_blank" rel="noopener" href="https://lightframe.vertillusion.xyz/">LightFrame官方网站-定义热爱的桌面</a><br>开发：<a target="_blank" rel="noopener" href="https://github.com/EnderMo">沫狐奶昔CimiMoly</a></p>
+<span id="more"></span>
+
+<h2 id="软件特点"><a href="#软件特点" class="headerlink" title="软件特点"></a>软件特点</h2><ul>
+<li><p>即开即用。使用自开发轻量级框架,实现极低的资源占用1在满足桌面体验需求的同时保证日常使用流畅。</p>
+</li>
+<li><p>使用应用内时钟、日历、便签纸等组件创造一个您喜爱的桌面2。此外,您还可以使用混合、组件切割功能使其更加贴合您的壁纸。</p>
+</li>
+<li><p>专注于您的体验。应用提供专注空间功能,您可以轻易组织您的任务。同时您可以搭配桌面组件布置,创造更加丰富的日常体验。</p>
+</li>
+<li><p>本应用始终不强制收费。当然,在有能力的情况下,希望您可以支持本应用来帮助我们长期开发和维护。</p>
+</li>
+</ul>
+<blockquote>
+<p>1.在一般情况下,运行内存不超过10MB.<br>2.相关内容请在应用内查看提示.</p>
+</blockquote>
+<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><p>从<a target="_blank" rel="noopener" href="https://lightframe.vertillusion.xyz/">官网</a>下载LightFrame.zip，并解压到一个固定的文件夹。<br>请勿直接在压缩包内打开！<br>如果双击运行出现<code>0xc000007b</code>,找不到<code>msvcp140.dll</code>等类似提示，请参考<a target="_blank" rel="noopener" href="https://aka.ms/vs/16/release/vc_redist.x64.exe">下载安装运行库</a><br>（然后就可以愉快的使用啦）<br>如果在使用的过程中遇到了Bug，我们欢迎您向我们反馈，具体请下面的参考Bug反馈</p>
+<h2 id="Bug反馈"><a href="#Bug反馈" class="headerlink" title="Bug反馈"></a>Bug反馈</h2><p>您可以通过一下两个渠道反馈bug：</p>
+<ol>
+<li><p>访问论坛，注册一个账号并发贴求助</p>
+</li>
+<li><p>加室长的QQ：2016860442，收集错误信息反馈bug</p>
+</li>
+</ol>
+<p>请提供C:\Users\账户名\AppData\Roaming\LightFrame文件夹下的 .vui文件，这将有助于Bug的判断<br>关于提问的方式，请参考<a target="_blank" rel="noopener" href="https://forum.vertillusion.xyz/d/34-ban-yun-ti-wen-de-yi-zhu">【搬运】提问的艺术 - Vertillusion</a></p>
+<h2 id="关于程序定制"><a href="#关于程序定制" class="headerlink" title="关于程序定制"></a>关于程序定制</h2><p>定制在本质上是对作品的一种支持~<br>比起直接赞助来说 你也获得了自己想要的特别版本呢owo</p>
+<h2 id="可定制范围："><a href="#可定制范围：" class="headerlink" title="可定制范围："></a>可定制范围：</h2><ul>
+<li>主页背景颜色(纯色&#x2F;渐变)</li>
+<li>标题栏颜色(纯色&#x2F;渐变)</li>
+<li>按钮(纯色圆角&#x2F;纯色直角&#x2F;纯色渐变)</li>
+<li>界面的添加&#x2F;修改&#x2F;删除(如位置&#x2F;文字&#x2F;横幅内容&#x2F;组件or窗口样式)</li>
+<li>特定UI</li>
+<li>vui卡片(自定义便签纸样式)</li>
+<li>个人实用功能(这个要花不少时间的去做的!)</li>
+<li>etc.</li>
+</ul>
+<p>在定制版中,您还可以为自己设置一个特别标识展示在程序的任何位置<br>如:标题栏 金色渐变 “ “</p>
+<table>
+<thead>
+<tr>
+<th>昵称</th>
+<th>贡献内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>沫狐奶昔 CimiMoly</td>
+<td>是LightFrame的造物主啦~ *:”Vertillusion”是属”CimiMoly”所有的发布载体.</td>
+</tr>
+<tr>
+<td>辰落火辉 Haceau-Zoac</td>
+<td>vui.parser</td>
+</tr>
+<tr>
+<td>憨包 MeroWindows</td>
+<td>vui.dom</td>
+</tr>
+<tr>
+<td>悠瑞 iYoRoy</td>
+<td>安装器和资源站</td>
+</tr>
+<tr>
+<td>xihale</td>
+<td>网站优化</td>
+</tr>
+<tr>
+<td>飞飞 Skywards</td>
+<td>网站优化</td>
+</tr>
+<tr>
+<td>诺尔 SlimeNull</td>
+<td>网站优化</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>FSRH:嘶那我呢awa,我可是弄了个Markdown呢（小声逼逼）</p>
+</blockquote>
+<h2 id="Change-Log"><a href="#Change-Log" class="headerlink" title="Change Log"></a>Change Log</h2><h3 id="v0-4-5-1-Build451-2023-5-27"><a href="#v0-4-5-1-Build451-2023-5-27" class="headerlink" title="v0.4.5.1 Build451 | 2023-5-27"></a>v0.4.5.1 Build451 | 2023-5-27</h3><ul>
+<li><p>新的滑动条和便签纸文本编辑交互</p>
+</li>
+<li><p>在便签纸多行文本溢出时,显示滚动条</p>
+</li>
+<li><p>其他小改动和bug修复</p>
+</li>
+</ul>
+<h3 id="v0-4-0-01-Build401-2023-01-02"><a href="#v0-4-0-01-Build401-2023-01-02" class="headerlink" title="v0.4.0.01 Build401 | 2023-01-02"></a>v0.4.0.01 Build401 | 2023-01-02</h3><ul>
+<li>修复箱子的长目录缓存问题</li>
+</ul>
+<h3 id="v0-4-0-Build395-2023-01-01"><a href="#v0-4-0-Build395-2023-01-01" class="headerlink" title="v0.4.0 Build395 | 2023-01-01"></a>v0.4.0 Build395 | 2023-01-01</h3><ul>
+<li><p>全新的界面!新的体验</p>
+</li>
+<li><p>重写的时钟组件 可用性更强!</p>
+</li>
+<li><p>日历本的小更新</p>
+</li>
+<li><p>独立的MC箱子 用来当文件夹也可以~</p>
+</li>
+<li><p>部分操作微调 更易用~</p>
+</li>
+</ul>
+<h3 id="v0-3-1-Build310-2022-09-10"><a href="#v0-3-1-Build310-2022-09-10" class="headerlink" title="v0.3.1 Build310 | 2022-09-10"></a>v0.3.1 Build310 | 2022-09-10</h3><ul>
+<li>修复部分隐式崩溃</li>
+</ul>
+<h3 id="Anniversary-Build300-2022-08-28"><a href="#Anniversary-Build300-2022-08-28" class="headerlink" title="Anniversary Build300 | 2022-08-28"></a>Anniversary Build300 | 2022-08-28</h3><ul>
+<li><p>主页更新!横幅与小贴纸~</p>
+</li>
+<li><p>专注空间大更新!倒计时器&amp;待办清单</p>
+</li>
+<li><p>事件检查器支持卡片添加</p>
+</li>
+<li><p>其他小改动和bug修复</p>
+</li>
+</ul>
+<h3 id="v0-2-4-Build240-2022-08-11"><a href="#v0-2-4-Build240-2022-08-11" class="headerlink" title="v0.2.4 Build240 | 2022-08-11"></a>v0.2.4 Build240 | 2022-08-11</h3><ul>
+<li><p>状态描述&amp;组件切割</p>
+</li>
+<li><p>其他小改动</p>
+</li>
+</ul>
+<h3 id="v0-2-0-Build200-2022-07-01"><a href="#v0-2-0-Build200-2022-07-01" class="headerlink" title="v0.2.0 Build200 | 2022-07-01"></a>v0.2.0 Build200 | 2022-07-01</h3><ul>
+<li><p>VertexUI-Twinkle轻卡片</p>
+</li>
+<li><p>组件体验优化</p>
+</li>
+<li><p>LimpidDesign设计引入</p>
+</li>
+<li><p>其他小改动</p>
+</li>
+</ul>
+<h3 id="Beta3-Build105-2022-03-05"><a href="#Beta3-Build105-2022-03-05" class="headerlink" title="Beta3 Build105 | 2022-03-05"></a>Beta3 Build105 | 2022-03-05</h3><ul>
+<li><p>新的UI和crash修复</p>
+</li>
+<li><p>新的发生器</p>
+</li>
+<li><p>在线更新</p>
+</li>
+</ul>
+<h3 id="Beta2-Build90-2022-01-18"><a href="#Beta2-Build90-2022-01-18" class="headerlink" title="Beta2 Build90 | 2022-01-18"></a>Beta2 Build90 | 2022-01-18</h3><ul>
+<li><p>粒子发生器</p>
+</li>
+<li><p>专注空间Beta &#x2F; 组件分析</p>
+</li>
+<li><p>(U1)使用VertexUI最新草案</p>
+</li>
+</ul>
+<h3 id="Beta2-Build75-2021-12-22"><a href="#Beta2-Build75-2021-12-22" class="headerlink" title="Beta2 Build75 | 2021-12-22"></a>Beta2 Build75 | 2021-12-22</h3><ul>
+<li><p>加入便签纸、文本贴纸、时钟</p>
+</li>
+<li><p>新的主题组件,修复bug若干</p>
+</li>
+<li><p>(U1)加入物品栏扩展选项</p>
+</li>
+</ul>
+<h3 id="Beta2-Build54-2021-11-21"><a href="#Beta2-Build54-2021-11-21" class="headerlink" title="Beta2 Build54 | 2021-11-21"></a>Beta2 Build54 | 2021-11-21</h3><ul>
+<li><p>加入ListPanel的进入动画</p>
+</li>
+<li><p>使用绘制缓存,大幅度提高绘制效率</p>
+</li>
+</ul>
+<h3 id="Beta2-Build53-2021-11-21"><a href="#Beta2-Build53-2021-11-21" class="headerlink" title="Beta2 Build53 | 2021-11-21"></a>Beta2 Build53 | 2021-11-21</h3><ul>
+<li><p>新的推入动画</p>
+</li>
+<li><p>加入ListPanel(表列面板)</p>
+</li>
+<li><p>部分加入控件动画</p>
+</li>
+</ul>
+<h3 id="Beta2-Build52-2021-11-14"><a href="#Beta2-Build52-2021-11-14" class="headerlink" title="Beta2 Build52 | 2021-11-14"></a>Beta2 Build52 | 2021-11-14</h3><ul>
+<li><p>新的UI</p>
+</li>
+<li><p>Minecraft主题框改为主题组件</p>
+</li>
+<li><p>物品栏Dock(未正式加入,仅测试)</p>
+</li>
+</ul>
+<h3 id="Beta2-Build51-2021-11-07"><a href="#Beta2-Build51-2021-11-07" class="headerlink" title="Beta2 Build51 | 2021-11-07"></a>Beta2 Build51 | 2021-11-07</h3><ul>
+<li><p>加入启动选项</p>
+</li>
+<li><p>修复日期框闪烁的bug</p>
+</li>
+</ul>
+<h3 id="Beta1-Build50-2021-10-30"><a href="#Beta1-Build50-2021-10-30" class="headerlink" title="Beta1 Build50 | 2021-10-30"></a>Beta1 Build50 | 2021-10-30</h3><ul>
+<li><p>首个对外发布版本!</p>
+</li>
+<li><p>加入Minecraft主题框</p>
+</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2023 MCMoonlight
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;FSRH,bxcxc
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
+<canvas
+    id="fireworks"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+></canvas>
+<script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
+<script src="/js/fireworks.min.js"></script>
